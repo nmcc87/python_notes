@@ -1,0 +1,7 @@
+#exclude by default
+*
+
+#include relevant files
+!/.gitignore
+!/sw-bib.bib
+!/notes.tex

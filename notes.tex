@@ -1,0 +1,227 @@
+{\def\ignore{\usepackage{ws-procs9x6}}}%disable hyper at arxiv
+{\def\ignore{\pdfoutput=1}}%use pdflatex at arxiv
+
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,text={160mm,247mm},centering]{geometry}
+\usepackage[affil-it]{authblk}
+% \usepackage{showkeys}
+
+\usepackage{amsmath,amssymb,fixmath,mathtools,slashed}
+\usepackage{multirow}
+
+\usepackage{showkeys}
+\usepackage[bookmarks=true,hyperfigures=true,draft=false]{hyperref}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+% \usepackage[nottoc]{tocbibind}
+\usepackage[nosort]{cite}
+\usepackage[bulletsep]{collref}
+\usepackage[dvipsnames]{xcolor}
+
+
+\usepackage{longtable}
+\usepackage{pdfpages}
+\usepackage{appendix}
+\usepackage{titlesec}         % For fancy titles -- very last thing to do!
+% \usepackage{titleps,titletoc} % For fancy titles -- very last thing to do!
+% \usepackage{showframe}
+% \usepackage{glossaries}
+
+%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+% \usepackage[Glenn]{fncychap}
+
+\usepackage[active]{srcltx}
+
+% Greek caps slanted
+% \usepackage{fixmath}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language and input
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% allows breaks in equation arrays
+
+\allowdisplaybreaks[3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% small figure captions
+
+\usepackage[font=small,labelfont=bf,width=0.85\textwidth]{caption}
+\usepackage{subcaption} % For subfigures and subcaptions [duh]
+
+\setcounter{tocdepth}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pagestyle{headings}
+
+
+\pagestyle{fancy}
+
+%--------------------------------------------------
+% The following page style is for article
+
+\titleformat{\section}[block]{\large\bfseries}{\thesection}{.3cm}{}[]
+\titlespacing{\section}{0pt}{*5}{*2}[5pt]
+\titleformat{\subsection}[block]{\large\bfseries}{\thesubsection}{.3cm}{}[]
+\titlespacing{\subsection}{0pt}{*2.5}{*1}
+\titleformat{\subsubsection}[runin]{\normalfont\sffamily\bfseries}{\thesubsubsection}{.3cm}{}[]
+\titlespacing{\subsubsection}{0pt}{*1.5}{*1}[3pt]
+
+\fancypagestyle{plain}{%
+\fancyhf{}%
+\fancyfoot[C]{\thepage}%
+\fancyhead[]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\fancyhead{} %
+\fancyhead[R]{}
+\fancyhead[L]{\leftmark}
+\fancyhead[LE]{\thepage}
+
+\fancyfoot{} % 
+\fancyfoot[C]{\thepage}%
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{mrabstract}[1]{
+  \begin{center}
+    {\sffamily\textbf{#1}}
+  \end{center}
+  \vspace{.5cm}
+  \begin{minipage}{12.7cm}}%
+  {\end{minipage}\par}
+
+
+\newcommand{\chapterunm}[1]{
+  \markboth{#1}{#1}%
+  \phantomsection
+  \chapter*{#1}
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+
+\newcommand{\chapterend}{\cleardoublepage}
+
+% Notice that \clearpage is overridden by \openright!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands, comments
+
+\newcommand{\remark}[2][]{{\normalfont\sffamily\hspace{1ex}%
+  \def\emph{\textsl}\def\textbullet{$\bullet$}
+  \def\tmparga{#1}%
+  \def\tmpargb{MR}\ifx\tmparga\tmpargb\color{magenta}\fi%
+  \def\tmpargb{NB}\ifx\tmparga\tmpargb\color{blue}\fi%
+  \def\tmpargb{AG}\ifx\tmparga\tmpargb\color{Orange}\fi%
+  \def\tmpargb{Refs}\ifx\tmparga\tmpargb\color{Orchid}\fi%
+  \def\tmpargb{}\ifx\tmparga\tmpargb\color{red}\fi%
+  \def\tmpargb{}\ifx\tmparga\tmpargb\else \textbf{#1:} \fi%
+  #2\hspace{1ex}}}
+
+\newcommand{\remarkref}[1][]{{\def\tmparga{#1}\def\tmpargb{}%
+  \ifx\tmparga\tmpargb\remark[Refs]{needed}\else\remark[Refs]{#1}\fi}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Missing pieces
+
+\newcommand{\needref}{{\normalfont\bfseries\textcolor{Fuchsia}{Add ref.}}}
+\newcommand{\needfig}{{\normalfont\bfseries\textcolor{Dandelion}{Add Figure!}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematical symbols, environments and commands
+
+\newcommand{\grp}[1]{\mathrm{#1}}
+\newcommand{\alg}[1]{\mathfrak{#1}}
+\DeclareMathOperator{\tr}{Tr}
+\newcommand{\half}{\frac{1}{2}}                 
+\newcommand{\thalf}{\tfrac{1}{2}}               
+
+% Command for nice list, in the abstract
+\newcommand{\abstrlist}[2]{\begin{minipage}[t]{1.0\textwidth}
+  \begin{minipage}[t]{.08\textwidth}
+    \mbox{#1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{.9\textwidth}
+    #2
+  \end{minipage}
+\end{minipage}
+\vskip 7pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References and hypersetup
+
+
+%-------------------------------------------------------------------------------
+% mathematics packages
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+
+
+%-------------------------------------------------------------------------------
+% hyperref and citations
+\hypersetup{final}
+
+%-------------------------------------------------------------------------------
+% numbering for equations
+\numberwithin{equation}{section}
+
+%-------------------------------------------------------------------------------
+% Commands
+\newcommand{\vard}[1]{\frac{\delta}{\delta #1}}
+\newcommand{\vardd}[2]{\frac{\delta #1}{\delta #2}}
+
+\newcommand{\der}{\mathrm{d}\mkern1mu}
+\newcommand{\quarter}{\frac{1}{4}}
+\newcommand{\tquarter}{\tfrac{1}{4}}
+\DeclareMathOperator{\str}{str}
+\DeclareMathOperator{\mdet}{det}
+\DeclareMathOperator{\msdet}{sdet}
+\DeclareMathOperator{\pexp}{\mathcal{P} \exp}
+
+
+
+\title{Notes about \texorpdfstring{$\mathcal{N}=2$}{N=2} SUSY gauge theories.}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Generic article style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{M. Rosso \thanks{Electronic address: \texttt{mrosso@itp.phys.ethz.ch}}}
+\affil{Institut f\"ur Theoretische Physik,\\ Humboldt Universit\"at zu Berlin,\\ zum Gro\ss en Windkanal 6, Berlin (D)}
+\date{}
+% The following is for the generic article style, comment out if necessary
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{References}
+\label{sec:references}
+
+For monopoles: Shifman's book,
+\cite{Weinberg2007,Harvey1996,Coleman1982,DiVecchia1998}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\bibliographystyle{utcaps}
+\bibliography{sw-bib}
+
+\end{document} 
